@@ -1,0 +1,16 @@
+@use "../../global.scss" as global;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: global.$secondary-color;
+  width: 100%;
+  color: global.$primary-color;
+  font-weight: bold;
+
+  p {
+    text-align: baseline;
+    margin: auto 1rem;
+  }
+}

@@ -1,16 +1,16 @@
 $primary-color: #539e88;
-$secondary-color: #f8f8f8;
-$font-family: "Roboto", sans-serif;
+$secondary-color: #f7f7f7;
+$highlight-color: #999;
+$font-family: "Open Sans", sans-serif;
 
 body {
   font-family: $font-family;
   margin: 0;
   padding: 0;
-  background-color: $secondary-color;
 }
 
 h1,
 h2,
 h3 {
-  color: $primary-color;
+  color: $primary-color !important;
 }

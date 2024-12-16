@@ -1,0 +1,10 @@
+@use "../../global.scss" as global;
+.footer {
+  text-align: center;
+  background-color: global.$primary-color;
+  width: 100%;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: global.$secondary-color;
+  font-weight: bold;
+}

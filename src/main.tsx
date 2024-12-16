@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./global.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import App from "./App";
+import "./global.scss";
 
 const rootElement = document.getElementById("root");
 
