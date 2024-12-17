@@ -15,6 +15,8 @@ const FarmListingPage: React.FC = () => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
+  const [searchEntry, setSearchEntry] = useState<string>("");
+
   useEffect(() => {
     const fetchFarms = async () => {
       try {
@@ -56,11 +58,21 @@ const FarmListingPage: React.FC = () => {
     }
   };
 
+  const filteredFarms = farms.filter((farm) =>
+    farm.farmName?.toLowerCase().includes(searchEntry.toLowerCase())
+  );
+
   return (
     <div className="container farm-listing">
-      <h1>FARMS REGISTERED</h1>
+      <h1>REGISTERED FARMS</h1>
       <div className="farm-listing-nav">
-        <div>search bar</div>
+        <input
+          type="search"
+          placeholder="  Search for the farm name"
+          className="farm-search w-25"
+          value={searchEntry}
+          onChange={(e) => setSearchEntry(e.target.value)}
+        />
         <button type="button" className="btn" onClick={openModal}>
           Add new farm
         </button>
@@ -68,7 +80,7 @@ const FarmListingPage: React.FC = () => {
       {farmsError ? (
         <div>Oops. Something is wrong here, but it will be back! </div>
       ) : (
-        <FarmList farms={farms} cropTypes={cropTypes} />
+        <FarmList farms={filteredFarms} cropTypes={cropTypes} />
       )}
       <Modal show={showModal} onClose={closeModal} title="Register New Farm">
         <AddFarmForm cropTypes={cropTypes} onSubmit={handleSubmit} />

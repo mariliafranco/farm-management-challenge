@@ -1,4 +1,5 @@
 @use "../../global.scss" as global;
+@use "sass:color";
 
 .farm-listing {
   h1 {
@@ -7,8 +8,21 @@
   }
 
   .farm-listing-nav {
+    margin-top: 3%;
     display: flex;
     justify-content: space-between;
+
+    .farm-search {
+      border: 1px solid global.$highlight-color;
+      border-radius: 2rem;
+      padding: 0.3rem;
+      font-size: 0.8rem;
+
+      &:focus-visible {
+        outline: 0;
+        border: 1px solid global.$primary-color;
+      }
+    }
 
     button {
       font-size: 0.8rem;
@@ -16,7 +30,7 @@
       color: global.$secondary-color;
 
       &:hover {
-        background: darken(global.$primary-color, 10%);
+        background: color.scale(global.$primary-color, $lightness: -10%);
       }
     }
   }

@@ -190,6 +190,21 @@
           "isInsured": false
         }
       ]
+    },
+    {
+      "id": "ad86",
+      "farmName": "",
+      "landArea": 1,
+      "landUnit": "Acre",
+      "farmAddress": "",
+      "cropProductions": [
+        {
+          "id": 1,
+          "cropTypeId": 1,
+          "isIrrigated": false,
+          "isInsured": false
+        }
+      ]
     }
   ],
   "crop-types": [
