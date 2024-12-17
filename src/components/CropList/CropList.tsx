@@ -14,21 +14,21 @@ const CropList: React.FC<CropProductionProps> = ({ farmCrops, cropTypes }) => {
   };
   return (
     <div className="crop-list">
-      <h5 className="row">Crop Production</h5>
+      <h5>Crop Production</h5>
       {farmCrops.map((crop) => (
         <div className="row crop-list-item" key={crop.id}>
-          <div className="col-4 crop-name">{getCropName(crop.cropTypeId)}</div>
+          <div className="col-2 crop-name">{getCropName(crop.cropTypeId)}</div>
           <div className="col d-flex justify-content-end align-items-center">
             {" "}
             {crop.isIrrigated && (
-              <div className="crop-detail">
+              <div className="crop-detail-blue">
                 <i className="bi bi-droplet-half px-2"></i>
                 Irrigated
               </div>
             )}
             {crop.isInsured && (
-              <div className="crop-detail ms-3">
-                <i className="bi bi-shield-fill-check"></i>
+              <div className="crop-detail-green ms-3">
+                <i className="bi bi-shield-fill-check px-2"></i>
                 Insured
               </div>
             )}

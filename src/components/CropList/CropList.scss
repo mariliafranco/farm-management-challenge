@@ -11,19 +11,24 @@
   }
 
   .crop-list-item {
-    margin: 5%;
+    margin: 5% 3%;
     font-size: 0.8rem;
     font-weight: bold;
+    align-items: baseline;
 
     .crop-name {
       text-transform: uppercase;
-
       text-align: start;
-      color: global.$primary-color;
+      color: global.$highlight-color;
     }
 
-    .crop-detail {
-      color: global.$highlight-color;
+    .crop-detail-blue {
+      padding: 0 0.5rem;
+      color: global.$details-color;
+    }
+
+    .crop-detail-green {
+      color: global.$primary-color;
     }
   }
 }

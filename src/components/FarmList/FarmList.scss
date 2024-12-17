@@ -4,6 +4,7 @@
   margin-top: 3rem;
   padding: 1rem 0;
   display: flex;
+  justify-content: center;
 }
 
 .farm-list-item {
@@ -18,11 +19,11 @@
 
     &:before {
       margin: auto;
-      width: 25px;
-      height: 10px;
+      width: 1.2rem;
+      height: 0.3rem;
       content: "";
       border-top: 1px solid global.$primary-color;
-      margin-top: 10px;
+      margin-top: 5%;
       display: block;
     }
   }
@@ -30,6 +31,6 @@
   p {
     margin: 10% 0;
     color: #555;
-    line-height: 1em;
+    line-height: 1rem;
   }
 }
