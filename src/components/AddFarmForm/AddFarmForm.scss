@@ -1,0 +1,90 @@
+@use "../../global.scss" as global;
+
+.form-container {
+  label {
+    font-size: 0.85rem;
+    text-align: start;
+    color: global.$highlight-color;
+    margin-bottom: 0;
+    margin-top: 1.2rem;
+  }
+
+  .form-control,
+  .form-select {
+    line-height: 1rem;
+    border-radius: 0.1rem;
+    font-size: 0.8rem;
+    border: 0;
+    outline: 0;
+    border-bottom: 0.01rem solid global.$highlight-color;
+
+    &:focus {
+      box-shadow: 0 0 0 0.05rem global.$primary-color;
+    }
+  }
+
+  p {
+    text-align: center;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-top: 5%;
+    color: #555;
+  }
+
+  .form-crop-items {
+    display: flex;
+    justify-content: center;
+
+    .form-crop-checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+
+      .form-check {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+
+        input[type="checkbox"] {
+          margin-bottom: 0;
+
+          &:checked {
+            color: global.$primary-color;
+            background-color: global.$primary-color;
+            border-color: global.$primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .form-crop-button {
+    display: flex;
+    justify-content: end;
+    margin-top: 5%;
+
+    button {
+      font-size: 0.8rem;
+      color: global.$highlight-color;
+
+      &:hover {
+        color: global.$primary-color;
+      }
+    }
+  }
+
+  .form-submit-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+
+    button {
+      background-color: global.$primary-color;
+      color: global.$secondary-color;
+
+      &:hover {
+        background: darken(global.$primary-color, 10%);
+      }
+    }
+  }
+}

@@ -12,6 +12,7 @@ const CropList: React.FC<CropProductionProps> = ({ farmCrops, cropTypes }) => {
     const cropType = cropTypes.find((type) => type.id === String(cropTypeId));
     return cropType ? cropType.name : "Crop is not registered";
   };
+
   return (
     <div className="crop-list">
       <h5>Crop Production</h5>

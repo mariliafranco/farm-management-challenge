@@ -15,14 +15,16 @@ export const getCropTypes = async (): Promise<CropType[]> => {
   return response.data;
 };
 
-export const addFarm = async (): Promise<Farm[]> => {
-  const response = await axios.post<Farm[]>(`${API_BASE_URL}/farms`);
+export const addFarm = async (newFarm: Omit<Farm, "id">) => {
+  const response = await axios.post<Farm>(`${API_BASE_URL}/farms`, newFarm);
 
-  return response;
+  console.log("New farm created!", response.data);
+
+  return response.data;
 };
 
 export const deleteFarm = async (id: string): Promise<Farm> => {
-  const response = await axios.delete<Farm[]>(`${API_BASE_URL}/farms/${id}`);
+  const response = await axios.delete<Farm>(`${API_BASE_URL}/farms/${id}`);
 
   return response;
 };

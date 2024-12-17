@@ -26,11 +26,11 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes }) => {
       {sortedFarms.map((farm) => (
         <div key={farm.id} className="col-md-4 col-sm-4 col-xs-12 mb-4">
           <div className="farm-list-item">
-            <h4>{farm.farmName}</h4>
+            <h4>{farm?.farmName || ""}</h4>
             <p>
               {farm.landArea} {farm.landUnit}
             </p>
-            <p>{farm.farmAddress || ""}</p>
+            <p>{farm?.farmAddress || ""}</p>
             {farm.cropProductions && farm.cropProductions.length > 0 ? (
               <CropList
                 farmCrops={farm.cropProductions}

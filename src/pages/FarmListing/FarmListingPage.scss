@@ -1,0 +1,23 @@
+@use "../../global.scss" as global;
+
+.farm-listing {
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .farm-listing-nav {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      font-size: 0.8rem;
+      background-color: global.$primary-color;
+      color: global.$secondary-color;
+
+      &:hover {
+        background: darken(global.$primary-color, 10%);
+      }
+    }
+  }
+}

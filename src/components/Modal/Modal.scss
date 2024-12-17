@@ -1,0 +1,37 @@
+@use "../../global.scss" as global;
+
+.modal {
+  .modal-header {
+    button:focus {
+      box-shadow: none;
+    }
+
+    h5 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: #555;
+    }
+  }
+
+  // .modal-footer {
+  //   height: 1.5rem;
+  //   button {
+  //     font-size: 1rem;
+  //     border: none;
+  //   }
+
+  //   .modal-close-button:hover {
+  //     color: global.$highlight-color;
+  //     color: global.$primary-color;
+  //   }
+
+  //   .modal-save-button {
+  //     background-color: global.$primary-color;
+  //     color: global.$secondary-color;
+
+  //     &:hover {
+  //       background: darken(global.$primary-color, 10%);
+  //     }
+  //   }
+  // }
+}

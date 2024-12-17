@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getCropTypes, getFarms } from "../../services/apiService";
+import { addFarm, getCropTypes, getFarms } from "../../services/apiService";
 import { CropType, Farm } from "../../types/Farm";
 import FarmList from "../../components/FarmList/FarmList";
+import Modal from "../../components/Modal/Modal";
+import AddFarmForm from "../../components/AddFarmForm/AddFarmForm";
+import "./FarmListingPage.scss";
 
 const FarmListingPage: React.FC = () => {
   const [farms, setFarms] = useState<Farm[]>([]);
 
   const [cropTypes, setCropTypes] = useState<CropType[]>([]);
 
-  const [farmsError, setFarmsError] = useState<Boolean>(false);
+  const [farmsError, setFarmsError] = useState<boolean>(false);
+
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchFarms = async () => {
@@ -38,11 +43,25 @@ const FarmListingPage: React.FC = () => {
     fetchCropTypes();
   }, []);
 
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
+
+  const handleSubmit = async (newFarm: Omit<Farm, "id">) => {
+    try {
+      const createdFarm = await addFarm(newFarm);
+      setFarms((prevFarms) => [...prevFarms, createdFarm]);
+      closeModal();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="container">
-      <h1>Farms List</h1>
-      <div className="d-flex justify-content-end">
-        <button type="button" className="btn btn-secondary btn-sm">
+    <div className="container farm-listing">
+      <h1>FARMS REGISTERED</h1>
+      <div className="farm-listing-nav">
+        <div>search bar</div>
+        <button type="button" className="btn" onClick={openModal}>
           Add new farm
         </button>
       </div>
@@ -51,6 +70,9 @@ const FarmListingPage: React.FC = () => {
       ) : (
         <FarmList farms={farms} cropTypes={cropTypes} />
       )}
+      <Modal show={showModal} onClose={closeModal} title="Register New Farm">
+        <AddFarmForm cropTypes={cropTypes} onSubmit={handleSubmit} />
+      </Modal>
     </div>
   );
 };
