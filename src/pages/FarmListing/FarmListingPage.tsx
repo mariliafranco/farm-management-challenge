@@ -55,7 +55,11 @@ const FarmListingPage: React.FC = () => {
 
   const handleSubmit = async (newFarm: Omit<Farm, "id">) => {
     try {
-      const createdFarm = await addFarm(newFarm);
+      const farmWithTimestamp = {
+        ...newFarm,
+        createdAt: new Date().toISOString(),
+      };
+      const createdFarm = await addFarm(farmWithTimestamp);
       setFarms((prevFarms) => [...prevFarms, createdFarm]);
       closeModal();
     } catch (error) {

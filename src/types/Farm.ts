@@ -17,4 +17,5 @@ export type Farm = {
   landUnit: string;
   farmAddress?: string;
   cropProductions: CropProduction[];
+  createdAt: string;
 };

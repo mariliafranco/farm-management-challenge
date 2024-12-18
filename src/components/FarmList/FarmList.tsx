@@ -3,7 +3,6 @@ import "./FarmList.scss";
 import { CropType, Farm } from "../../types/Farm";
 import CropList from "../CropList/CropList";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-import Modal from "../Modal/Modal";
 
 type FarmListProps = {
   farms: Farm[];
@@ -15,7 +14,8 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   const sortedFarms = [...farms].sort(
-    (a: Farm, b: Farm) => Number(b.id) - Number(a.id)
+    (a: Farm, b: Farm) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
   if (!farms.length) {
