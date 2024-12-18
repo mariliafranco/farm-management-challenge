@@ -1,0 +1,33 @@
+@use "../../styles/mixins" as mixins;
+@use "../../styles/global.scss" as global;
+
+.modal {
+  .modal-content {
+    border-color: global.$primary-color;
+    background-color: global.$secondary-color;
+    text-align: center;
+
+    .modal-body {
+      padding: 0.75rem 1rem;
+    }
+
+    p {
+      margin: 0 0 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+
+      button {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+      }
+
+      .modal-confirm-button {
+        @include mixins.button-styles;
+      }
+    }
+  }
+}

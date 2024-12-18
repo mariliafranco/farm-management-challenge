@@ -1,4 +1,4 @@
-@use "../../global.scss" as global;
+@use "../../styles/global.scss" as global;
 
 .crop-list {
   margin-top: 15%;
@@ -25,6 +25,11 @@
     .crop-detail-blue {
       padding: 0 0.5rem;
       color: global.$details-color;
+    }
+
+    .crop-detail-red {
+      padding: 0 0.5rem;
+      color: #cc3340;
     }
 
     .crop-detail-green {

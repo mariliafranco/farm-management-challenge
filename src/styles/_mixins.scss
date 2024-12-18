@@ -1,0 +1,16 @@
+@use "sass:color";
+@use "./global.scss" as global;
+
+@mixin button-styles(
+  $font-size: 0.8rem,
+  $bg-color: global.$primary-color,
+  $text-color: global.$secondary-color
+) {
+  font-size: $font-size;
+  background-color: $bg-color;
+  color: $text-color;
+
+  &:hover {
+    background: color.scale(global.$primary-color, $lightness: -10%);
+  }
+}

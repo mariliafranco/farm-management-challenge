@@ -23,10 +23,8 @@ export const addFarm = async (newFarm: Omit<Farm, "id">) => {
   return response.data;
 };
 
-export const deleteFarm = async (id: string): Promise<Farm> => {
-  const response = await axios.delete<Farm>(`${API_BASE_URL}/farms/${id}`);
-
-  return response;
+export const deleteFarm = async (id: string): Promise<void> => {
+  await axios.delete<Farm>(`${API_BASE_URL}/farms/${id}`);
 };
 
 export const updateFarm = async (id: string): Promise<Farm> => {

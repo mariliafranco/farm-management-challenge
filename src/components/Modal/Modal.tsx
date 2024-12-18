@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Modal.scss";
 
 type ModalProps = {
@@ -26,16 +26,6 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, title, children }) => {
             ></button>
           </div>
           <div className="modal-body">{children}</div>
-          {/* <div className="modal-footer">
-            <button
-              type="button"
-              className="btn modal-close-button"
-              data-bs-dismiss="modal"
-              onClick={onClose}
-            >
-              Close
-            </button>
-          </div> */}
         </div>
       </div>
     </div>

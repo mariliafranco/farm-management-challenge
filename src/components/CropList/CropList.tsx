@@ -21,15 +21,25 @@ const CropList: React.FC<CropProductionProps> = ({ farmCrops, cropTypes }) => {
           <div className="col-2 crop-name">{getCropName(crop.cropTypeId)}</div>
           <div className="col d-flex justify-content-end align-items-center">
             {" "}
-            {crop.isIrrigated && (
+            {crop.isIrrigated ? (
               <div className="crop-detail-blue">
                 <i className="bi bi-droplet-half px-2"></i>
                 Irrigated
               </div>
+            ) : (
+              <div className="crop-detail-red">
+                <i className="bi bi-x-circle-fill px-2"></i>
+                Irrigated
+              </div>
             )}
-            {crop.isInsured && (
+            {crop.isInsured ? (
               <div className="crop-detail-green ms-3">
                 <i className="bi bi-shield-fill-check px-2"></i>
+                Insured
+              </div>
+            ) : (
+              <div className="crop-detail-red ms-3">
+                <i className="bi bi-x-circle-fill px-2"></i>
                 Insured
               </div>
             )}

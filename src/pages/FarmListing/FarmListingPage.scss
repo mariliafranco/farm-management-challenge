@@ -1,5 +1,5 @@
-@use "../../global.scss" as global;
-@use "sass:color";
+@use "../../styles/mixins" as mixins;
+@use "../../styles/global.scss" as global;
 
 .farm-listing {
   h1 {
@@ -25,13 +25,7 @@
     }
 
     button {
-      font-size: 0.8rem;
-      background-color: global.$primary-color;
-      color: global.$secondary-color;
-
-      &:hover {
-        background: color.scale(global.$primary-color, $lightness: -10%);
-      }
+      @include mixins.button-styles;
     }
   }
 }

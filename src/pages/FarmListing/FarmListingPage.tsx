@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { addFarm, getCropTypes, getFarms } from "../../services/apiService";
+import {
+  addFarm,
+  deleteFarm,
+  getCropTypes,
+  getFarms,
+} from "../../services/apiService";
 import { CropType, Farm } from "../../types/Farm";
 import FarmList from "../../components/FarmList/FarmList";
 import Modal from "../../components/Modal/Modal";
@@ -54,7 +59,21 @@ const FarmListingPage: React.FC = () => {
       setFarms((prevFarms) => [...prevFarms, createdFarm]);
       closeModal();
     } catch (error) {
-      console.log(error);
+      console.error("Error creating farm:", error);
+    }
+  };
+
+  const getUpdatedFarmList = async () => {
+    const updatedFarmList = await getFarms();
+    setFarms(updatedFarmList);
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteFarm(id);
+      getUpdatedFarmList();
+    } catch (error) {
+      console.error("Error deleting farm:", error);
     }
   };
 
@@ -80,7 +99,11 @@ const FarmListingPage: React.FC = () => {
       {farmsError ? (
         <div>Oops. Something is wrong here, but it will be back! </div>
       ) : (
-        <FarmList farms={filteredFarms} cropTypes={cropTypes} />
+        <FarmList
+          farms={filteredFarms}
+          cropTypes={cropTypes}
+          onDelete={handleDelete}
+        />
       )}
       <Modal show={showModal} onClose={closeModal} title="Register New Farm">
         <AddFarmForm cropTypes={cropTypes} onSubmit={handleSubmit} />

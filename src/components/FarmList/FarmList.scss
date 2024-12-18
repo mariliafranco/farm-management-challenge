@@ -1,4 +1,4 @@
-@use "../../global.scss" as global;
+@use "../../styles/global.scss" as global;
 
 .farm-list {
   margin-top: 2rem;
@@ -11,29 +11,50 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 20% 10%;
   margin: auto;
   border-radius: 3%;
   background-color: global.$secondary-color;
 
-  h4 {
-    text-align: center;
-    font-size: 1.35em;
+  .farm-delete-icon {
+    display: flex;
+    justify-content: end;
+    padding: 1rem;
+    color: global.$highlight-color;
 
-    &:before {
-      margin: auto;
-      width: 1.2rem;
-      height: 0.3rem;
-      content: "";
-      border-top: 1px solid global.$primary-color;
-      margin-top: 5%;
-      display: block;
+    button {
+      border: unset;
+      background-color: unset;
+      color: global.$highlight-color;
+      float: end;
+
+      &:hover {
+        color: global.$primary-color;
+      }
     }
   }
 
-  p {
-    margin: 10% 0;
-    color: #555;
-    line-height: 1rem;
+  .farm-content {
+    padding: 8% 10%;
+
+    h4 {
+      text-align: center;
+      font-size: 1.35em;
+
+      &:before {
+        margin: auto;
+        width: 1.2rem;
+        height: 0.3rem;
+        content: "";
+        border-top: 1px solid global.$primary-color;
+        margin-top: 5%;
+        display: block;
+      }
+    }
+
+    p {
+      margin: 10% 0;
+      color: global.$highlight-color;
+      line-height: 1rem;
+    }
   }
 }
