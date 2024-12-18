@@ -1,7 +1,7 @@
 @use "../../styles/mixins" as mixins;
 @use "../../styles/global.scss" as global;
 
-.modal {
+.confirm-modal {
   .modal-content {
     border-color: global.$primary-color;
     background-color: global.$secondary-color;

@@ -19,7 +19,11 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="modal show d-block" tabIndex={-1} role="dialog">
+    <div
+      className="modal confirm-modal show d-block"
+      tabIndex={-1}
+      role="dialog"
+    >
       <div className="modal-dialog modal-sm modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-body">
