@@ -57,9 +57,23 @@
         }
       }
     }
+
+    .form-remove-crop {
+      display: flex;
+      align-items: end;
+
+      button {
+        background-color: unset;
+        color: global.$highlight-color;
+
+        &:hover {
+          color: global.$primary-color;
+        }
+      }
+    }
   }
 
-  .form-crop-button {
+  .form-add-crop {
     display: flex;
     justify-content: end;
     margin-top: 5%;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { CropProduction, CropType, Farm } from "../../types/Farm";
 import "./AddFarmForm.scss";
 
@@ -10,19 +10,23 @@ type AddFarmProps = {
 const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
   const [farmDetails, setFarmDetails] = useState({
     farmName: "",
-    landArea: 1,
-    landUnit: "Acre",
+    landArea: 0,
+    landUnit: "",
     farmAddress: "",
   });
 
-  const [cropProductions, setCropProductions] = useState<CropProduction[]>([
+  const [farmCrops, setFarmCrops] = useState<CropProduction[]>([
     {
-      id: 1,
+      id: 0,
       cropTypeId: 1,
       isIrrigated: false,
       isInsured: false,
     },
   ]);
+
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  const nextCropId = useRef(1);
 
   const farmFormFields = [
     {
@@ -38,7 +42,7 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
       colSize: "12",
     },
     {
-      inputType: "text",
+      inputType: "number",
       name: "landArea",
       label: "Land Area",
       required: true,
@@ -60,32 +64,65 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
   ) => {
     const { name, value } = e.target;
     setFarmDetails((prev) => ({ ...prev, [name]: value }));
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleCropChange = (
-    index: number,
+    id: number,
     field: keyof CropProduction,
-    value: any
+    value: CropProduction[keyof CropProduction]
   ) => {
-    const updatedCrops = [...cropProductions];
-    updatedCrops[index][field] = value;
-    setCropProductions(updatedCrops);
+    console.log("id:", id, "field", field, "value", value);
+    console.log("farmCorps", farmCrops);
+    setFarmCrops((prevCrops) =>
+      prevCrops.map((crop) =>
+        crop.id === id ? { ...crop, [field]: value } : crop
+      )
+    );
   };
 
   const addNewCrop = () => {
-    const nextCropId = cropProductions.length + 1;
-    setCropProductions([
-      ...cropProductions,
-      { id: nextCropId, cropTypeId: 1, isIrrigated: false, isInsured: false },
+    setFarmCrops((prevCrops) => [
+      ...prevCrops,
+      {
+        id: nextCropId.current,
+        cropTypeId: cropTypes.length > 0 ? Number(cropTypes[0].id) : 0,
+        isIrrigated: false,
+        isInsured: false,
+      },
     ]);
+    nextCropId.current += 1;
+  };
+
+  const removeLastAddedCrop = (cropId: number) => {
+    setFarmCrops(farmCrops.filter((crop) => crop.id !== cropId));
+  };
+
+  const validateRequiredFields = () => {
+    const newErrors: Record<string, string> = {};
+    farmFormFields.forEach((field) => {
+      if (
+        field.required &&
+        !farmDetails[field.name as keyof typeof farmDetails]
+      ) {
+        newErrors[field.name] = `${field.name} is required`;
+      }
+    });
+
+    setFormErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!validateRequiredFields()) return;
+
     const newFarm: Omit<Farm, "id"> = {
       ...farmDetails,
-      cropProductions,
+      createdAt: new Date().toISOString(),
+      cropProductions: farmCrops,
     };
 
     onSubmit(newFarm);
@@ -106,6 +143,7 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
               onChange={handleFieldChange}
               required={field.required}
             >
+              <option value="">Choose Unit</option>
               {field.options?.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -116,6 +154,9 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
             <input
               type={field.inputType}
               className="form-control"
+              minLength={2}
+              maxLength={100}
+              min={1}
               name={field.name}
               value={farmDetails[field.name as keyof typeof farmDetails]}
               onChange={handleFieldChange}
@@ -123,11 +164,14 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
               placeholder={`Enter ${field.label}`}
             />
           )}
+          {formErrors[field.name] && (
+            <small className="text-danger">{formErrors[field.name]}</small>
+          )}
         </div>
       ))}
       <p>Crop Productions</p>
-      {cropProductions.map((crop, index) => (
-        <div className="form-crop-items" key={crop.cropTypeId}>
+      {farmCrops.map((crop, index) => (
+        <div className="form-crop-items" key={crop.id}>
           <div className="col-5">
             <label htmlFor={`crop-${crop.id}`}>Crop Name</label>
             <div key={crop.id}>
@@ -136,9 +180,14 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
                 className="form-select"
                 value={crop.cropTypeId}
                 onChange={(e) =>
-                  handleCropChange(index, "cropTypeId", Number(e.target.value))
+                  handleCropChange(
+                    crop.id,
+                    "cropTypeId",
+                    Number(e.target.value)
+                  )
                 }
               >
+                <option value="">Choose Crop</option>
                 {cropTypes.map((type) => (
                   <option key={type.id} value={Number(type.id)}>
                     {type.name}
@@ -154,7 +203,7 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
                 className="form-check-input"
                 checked={crop.isIrrigated}
                 onChange={(e) =>
-                  handleCropChange(index, "isIrrigated", e.target.checked)
+                  handleCropChange(crop.id, "isIrrigated", e.target.checked)
                 }
               />
               <label className="form-check-label ms-2">Irrigated</label>
@@ -165,16 +214,33 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
                 className="form-check-input ms-3"
                 checked={crop.isInsured}
                 onChange={(e) =>
-                  handleCropChange(index, "isInsured", e.target.checked)
+                  handleCropChange(crop.id, "isInsured", e.target.checked)
                 }
               />
               <label className="form-check-label ms-2">Insured</label>
             </div>
           </div>
+          {farmCrops.length > 1 && (
+            <div className="form-remove-crop">
+              <button
+                className="btn"
+                type="button"
+                onClick={() => removeLastAddedCrop(crop.id)}
+              >
+                <i className="bi bi-x"></i>
+              </button>
+            </div>
+          )}
         </div>
       ))}
-      <div className="form-crop-button">
-        <button type="button" className="btn mb-3" onClick={addNewCrop}>
+
+      <div className="form-add-crop">
+        <button
+          type="button"
+          className="btn mb-3"
+          onClick={addNewCrop}
+          disabled={farmCrops.length === cropTypes.length}
+        >
           ADD NEW CROP
         </button>
       </div>

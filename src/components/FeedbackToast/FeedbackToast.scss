@@ -1,0 +1,24 @@
+@use "../../styles/_mixins.scss" as mixins;
+@use "../../styles/global.scss" as global;
+
+.toast-container {
+  .positive-feedback {
+    .toast-header {
+      background-color: global.$primary-color;
+      color: global.$secondary-color;
+    }
+    .toast-body {
+      color: global.$highlight-color;
+    }
+  }
+
+  .negative-feedback {
+    .toast-header {
+      background-color: global.$red-color;
+      color: global.$secondary-color;
+    }
+    .toast-body {
+      color: global.$highlight-color;
+    }
+  }
+}

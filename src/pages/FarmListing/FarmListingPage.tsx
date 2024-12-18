@@ -10,6 +10,7 @@ import FarmList from "../../components/FarmList/FarmList";
 import Modal from "../../components/Modal/Modal";
 import AddFarmForm from "../../components/AddFarmForm/AddFarmForm";
 import "./FarmListingPage.scss";
+import FeedbackToast from "../../components/FeedbackToast/FeedbackToast";
 
 const FarmListingPage: React.FC = () => {
   const [farms, setFarms] = useState<Farm[]>([]);
@@ -21,6 +22,14 @@ const FarmListingPage: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const [searchEntry, setSearchEntry] = useState<string>("");
+
+  const [feedbackTitle, setFeedbackTitle] = useState<string>("");
+
+  const [feedbackMessage, setFeedbackMessage] = useState<string>("");
+
+  const [showFeedback, setShowFeedback] = useState<boolean>(false);
+
+  const [isPositiveFeedback, setIsPositiveFeedback] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchFarms = async () => {
@@ -50,20 +59,37 @@ const FarmListingPage: React.FC = () => {
     fetchCropTypes();
   }, []);
 
+  useEffect(() => {
+    if (showFeedback) {
+      const timer = setTimeout(() => setShowFeedback(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showFeedback]);
+
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
+  const generateFeedback = (
+    isPositive: boolean,
+    title: string,
+    message: string
+  ) => {
+    setShowFeedback(true);
+    setIsPositiveFeedback(isPositive);
+    setFeedbackTitle(title);
+    setFeedbackMessage(message);
+  };
+
   const handleSubmit = async (newFarm: Omit<Farm, "id">) => {
     try {
-      const farmWithTimestamp = {
-        ...newFarm,
-        createdAt: new Date().toISOString(),
-      };
-      const createdFarm = await addFarm(farmWithTimestamp);
+      const createdFarm = await addFarm(newFarm);
       setFarms((prevFarms) => [...prevFarms, createdFarm]);
       closeModal();
+
+      generateFeedback(true, "All Done", "New farm created");
     } catch (error) {
       console.error("Error creating farm:", error);
+      generateFeedback(false, "Not a good deal", "New farm was not created");
     }
   };
 
@@ -76,8 +102,11 @@ const FarmListingPage: React.FC = () => {
     try {
       await deleteFarm(id);
       getUpdatedFarmList();
+
+      generateFeedback(true, "All done", "Farm was deleted!");
     } catch (error) {
       console.error("Error deleting farm:", error);
+      generateFeedback(false, "Not a good deal", "Farm was not deleted");
     }
   };
 
@@ -112,6 +141,13 @@ const FarmListingPage: React.FC = () => {
       <Modal show={showModal} onClose={closeModal} title="Register New Farm">
         <AddFarmForm cropTypes={cropTypes} onSubmit={handleSubmit} />
       </Modal>
+      <FeedbackToast
+        title={feedbackTitle}
+        message={feedbackMessage}
+        showFeedback={showFeedback}
+        isPositive={isPositiveFeedback}
+        closeFeedback={() => setShowFeedback(false)}
+      />
     </div>
   );
 };

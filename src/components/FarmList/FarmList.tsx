@@ -3,6 +3,7 @@ import "./FarmList.scss";
 import { CropType, Farm } from "../../types/Farm";
 import CropList from "../CropList/CropList";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import { deleteFarm } from "../../services/apiService";
 
 type FarmListProps = {
   farms: Farm[];
@@ -12,6 +13,7 @@ type FarmListProps = {
 
 const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+  const [deleteFarmId, setDeleteFarmId] = useState<string>("");
 
   const sortedFarms = [...farms].sort(
     (a: Farm, b: Farm) =>
@@ -26,8 +28,15 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
     );
   }
 
-  const openConfirmModal = () => setShowConfirmModal(true);
-  const closeConfirmModal = () => setShowConfirmModal(false);
+  const openConfirmModal = (farmId: string) => {
+    setDeleteFarmId(farmId);
+    setShowConfirmModal(true);
+  };
+
+  const closeConfirmModal = () => {
+    setDeleteFarmId("");
+    setShowConfirmModal(false);
+  };
 
   return (
     <div className="row farm-list">
@@ -35,7 +44,7 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
         <div key={farm.id} className="col-md-4 col-sm-4 col-xs-12 mb-4">
           <div className="farm-list-item">
             <div className="farm-delete-icon">
-              <button type="button" onClick={openConfirmModal}>
+              <button type="button" onClick={() => openConfirmModal(farm.id)}>
                 <i className="bi bi-trash3"></i>
               </button>
             </div>
@@ -71,7 +80,7 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
             message={"Are you sure you want to delete this farm?"}
             confirmButton={"Yes, delete farm"}
             onConfirm={() => {
-              onDelete(farm.id);
+              onDelete(deleteFarmId);
               setShowConfirmModal(false);
             }}
           />

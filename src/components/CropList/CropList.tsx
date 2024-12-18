@@ -10,7 +10,7 @@ type CropProductionProps = {
 const CropList: React.FC<CropProductionProps> = ({ farmCrops, cropTypes }) => {
   const getCropName = (cropTypeId: number): string => {
     const cropType = cropTypes.find((type) => type.id === String(cropTypeId));
-    return cropType ? cropType.name : "Crop is not registered";
+    return cropType ? cropType.name : "";
   };
 
   return (
@@ -19,7 +19,7 @@ const CropList: React.FC<CropProductionProps> = ({ farmCrops, cropTypes }) => {
       {farmCrops.map((crop) => (
         <div className="row crop-list-item" key={crop.id}>
           <div className="col-2 crop-name">{getCropName(crop.cropTypeId)}</div>
-          <div className="col d-flex justify-content-end align-items-center">
+          <div className="col ms-3 d-flex justify-content-around align-items-center">
             {" "}
             {crop.isIrrigated ? (
               <div className="crop-detail-blue">
@@ -33,12 +33,12 @@ const CropList: React.FC<CropProductionProps> = ({ farmCrops, cropTypes }) => {
               </div>
             )}
             {crop.isInsured ? (
-              <div className="crop-detail-green ms-3">
+              <div className="crop-detail-green">
                 <i className="bi bi-shield-fill-check px-2"></i>
                 Insured
               </div>
             ) : (
-              <div className="crop-detail-red ms-3">
+              <div className="crop-detail-red">
                 <i className="bi bi-x-circle-fill px-2"></i>
                 Insured
               </div>
