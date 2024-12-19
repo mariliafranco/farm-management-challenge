@@ -180,7 +180,7 @@ farm-management-app/
 
 `_src/styles/_`: Define Global and Mixins to be reusable as SCSS styles
 
-`_src/pages/_`: Contains the main page and the Not Found Page
+`_src/pages/_`: Contains the Farm Listing Page and the Not Found Page
 
 `_src/components/_`: Contains React components for the application
 
@@ -247,5 +247,7 @@ Next round of improvements for the application:
 - Paginated results with dynamic page sizes.
 
 - Implementing unit and end-to-end tests.
+
+##
 
 This is a project made with ❤ by Marília Franco.
