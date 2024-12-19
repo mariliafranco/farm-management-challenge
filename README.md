@@ -122,7 +122,7 @@ json-server --watch db.json --port 3001
 
 _This will start the JSON Server at http://localhost:3001_
 
-###### Start the React Application:
+## Start the React Application:
 
 Open a new terminal in the project root and run:
 
@@ -132,7 +132,7 @@ npm run dev
 
 The application will run at http://localhost:5173.
 
-###### Project Structure
+## Project Structure
 
 ```
 farm-management-app/
@@ -196,7 +196,7 @@ _vite.config.ts_: Vite configuration file
 
 _README.md_: Project documentation
 
-###### TypeScript Integration
+## TypeScript Integration
 
 This project uses TypeScript to enhance code quality. Here is an example of Type Definition, used in _types/Farms.js_:
 
@@ -224,7 +224,7 @@ createdAt: string;
 };
 ```
 
-###### API Endpoints
+## API Endpoints
 
 The application interacts with the following API endpoints provided by JSON Server:
 
@@ -240,7 +240,7 @@ _Crop Types:_
 
 GET /cropTypes: Retrieve all crop types.
 
-###### Future Enhancements
+## Future Enhancements
 
 Next round of improvements for the application:
 
