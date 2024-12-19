@@ -200,7 +200,7 @@ _README.md_: Project documentation
 
 This project uses TypeScript to enhance code quality. Here is an example of Type Definition, used in _types/Farms.js_:
 
-´´´
+```
 export type CropProduction = {
 id: number;
 cropTypeId: number;
@@ -222,7 +222,7 @@ farmAddress?: string;
 cropProductions: CropProduction[];
 createdAt: string;
 };
-´´´
+```
 
 ###### API Endpoints
 
