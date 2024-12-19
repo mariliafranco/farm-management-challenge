@@ -123,17 +123,27 @@ npm run dev
 
 The application will run at http://localhost:5173.
 
-Project Structure
+###### Project Structure
 
 ```
 farm-management-app/
 ├── public/
 ├── src/
-│   ├── components/
+│   ├── assets/
 │   │
+│   ├── components/
+│   │   └── CropList
+│   │       ├── CropList.tsx
+│   │       └── CropList.scss
 │   │
 │   ├── pages/
+│   │ └── FarmListingPage
+│   │       ├── FarmListingPage.tsx
+│   │       └── FarmListingPage.scss
+│   │
 │   ├── services/
+│   │
+│   ├── styles/
 │   │
 │   ├── types/
 │   │
@@ -143,6 +153,7 @@ farm-management-app/
 ├── db.json
 ├── tsconfig.json
 ├── package.json
+├── vite.config.js
 └── README.md
 ```
 
@@ -206,5 +217,5 @@ GET /cropTypes: Retrieve all crop types.
 
 Next round of improvements for the application:
 
-Paginated results with dynamic page sizes.
-Implementing unit and end-to-end tests.
+- Paginated results with dynamic page sizes.
+- Implementing unit and end-to-end tests.
