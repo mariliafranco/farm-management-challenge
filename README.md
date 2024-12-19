@@ -2,20 +2,24 @@
 
 The main goal of this application is to register and manage farms with their associated crop productions. It is based on creating and deleting farms with nested crops production, while listing from the most recent to the oldest.
 
-#### Features
+## Features
 
-_Create a Farm:_ Add a new farm with details including land area, unit of measure, address, and associated crop productions.
+_Create a Farm:_ Add a new farm with details including name, land area, unit of measure, address, and associated crop productions.
 
 _Delete a Farm:_ Remove an existing farm by its unique identifier.
 
 _List Farms:_ Display all farms, ordered from the most recent to the oldest based on their creation date.
 
-#### Technologies Used
+## Technologies Used
 
 **Frontend:** React.js with TypeScript
+
 **Build Tool:** Vite
+
 **Backend:** JSON Server
+
 **HTTP Client:** Axios
+
 **Styling:** Bootstrap and SCSS
 
 ## Getting Started
@@ -23,8 +27,11 @@ _List Farms:_ Display all farms, ordered from the most recent to the oldest base
 Follow these instructions to set up and run the project locally.
 
 **Prerequisites**
+
 You will need the following installed on your system:
+
 _Node.js (v14 or later)_
+
 _npm (v6 or later)_
 
 ## Installation
@@ -159,21 +166,35 @@ farm-management-app/
 └── README.md
 ```
 
-_public/_: Contains the favicon (static asset).
-_assets/_: Contains the logo.
-_index.html_: Main HTML file.
-_package.json_: Project metadata and dependencies.
-_src/App.tsx_: The root React component.
-_src/main.tsx_: Entry point for the React application.
-_src/styles/_: Define Global and Mixins to be reusable as SCSS styles.
-_src/pages/_: Contains the main page and the Not Found Page.
-_src/components/_: Contains React components for the application.
-_src/services/apiService.ts_: Includes functions for API calls using Axios.
-_src/types/Farm.ts_: Defines TypeScript types and interfaces for the application.
-_db.json_: Simulated database for JSON Server.
-_tsconfig.json_: TypeScript configuration file.
-_vite.config.ts_: Vite configuration file.
-_README.md_: Project documentation.
+_public/_: Contains the favicon (static asset)
+
+_assets/_: Contains the logo
+
+_index.html_: Main HTML file
+
+_package.json_: Project metadata and dependencies
+
+_src/App.tsx_: The root React component
+
+_src/main.tsx_: Entry point for the React application
+
+_src/styles/_: Define Global and Mixins to be reusable as SCSS styles
+
+_src/pages/_: Contains the main page and the Not Found Page
+
+_src/components/_: Contains React components for the application
+
+_src/services/apiService.ts_: Includes functions for API calls using Axios
+
+_src/types/Farm.ts_: Defines TypeScript types and interfaces for the application
+
+_db.json_: Simulated database for JSON Server
+
+_tsconfig.json_: TypeScript configuration file
+
+_vite.config.ts_: Vite configuration file
+
+_README.md_: Project documentation
 
 ###### TypeScript Integration
 
@@ -208,11 +229,15 @@ createdAt: string;
 The application interacts with the following API endpoints provided by JSON Server:
 
 _Farms:_
+
 GET /farms: Retrieve all farms.
+
 POST /farms: Create a new farm.
+
 DELETE /farms/:id: Delete a farm by ID.
 
 _Crop Types:_
+
 GET /cropTypes: Retrieve all crop types.
 
 ###### Future Enhancements
@@ -220,4 +245,5 @@ GET /cropTypes: Retrieve all crop types.
 Next round of improvements for the application:
 
 - Paginated results with dynamic page sizes.
+
 - Implementing unit and end-to-end tests.
