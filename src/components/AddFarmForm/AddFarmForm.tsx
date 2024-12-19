@@ -157,6 +157,7 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
               minLength={2}
               maxLength={100}
               min={1}
+              step="any"
               name={field.name}
               value={farmDetails[field.name as keyof typeof farmDetails]}
               onChange={handleFieldChange}
@@ -170,7 +171,7 @@ const AddFarmForm: React.FC<AddFarmProps> = ({ cropTypes, onSubmit }) => {
         </div>
       ))}
       <p>Crop Productions</p>
-      {farmCrops.map((crop, index) => (
+      {farmCrops.map((crop) => (
         <div className="form-crop-items" key={crop.id}>
           <div className="col-5">
             <label htmlFor={`crop-${crop.id}`}>Crop Name</label>

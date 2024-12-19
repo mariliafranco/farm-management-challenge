@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
   addFarm,
   deleteFarm,
@@ -11,13 +11,24 @@ import Modal from "../../components/Modal/Modal";
 import AddFarmForm from "../../components/AddFarmForm/AddFarmForm";
 import "./FarmListingPage.scss";
 import FeedbackToast from "../../components/FeedbackToast/FeedbackToast";
+import ErrorPage from "../ErrorPage/ErrorPage";
+import Spinner from "../../components/Spinner/Spinner";
+
+type ErrorProps = {
+  message: string;
+  code?: string;
+};
 
 const FarmListingPage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [farms, setFarms] = useState<Farm[]>([]);
 
   const [cropTypes, setCropTypes] = useState<CropType[]>([]);
 
   const [farmsError, setFarmsError] = useState<boolean>(false);
+
+  const [errorDetails, setErrorDetails] = useState<ErrorProps | null>(null);
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -33,13 +44,21 @@ const FarmListingPage: React.FC = () => {
 
   useEffect(() => {
     const fetchFarms = async () => {
+      setIsLoading(true);
       try {
         const farmsList = await getFarms();
         setFarms(farmsList);
         setFarmsError(false);
-      } catch (error) {
+      } catch (error: unknown) {
         console.error("Error fetching farms:", error);
         setFarmsError(true);
+        if (error instanceof Error) {
+          setErrorDetails(error);
+        } else {
+          setErrorDetails({ message: "" });
+        }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -129,15 +148,17 @@ const FarmListingPage: React.FC = () => {
           Add new farm
         </button>
       </div>
-      {farmsError ? (
-        <div>Oops. Something is wrong here, but it will be back! </div>
-      ) : (
+      {farmsError && <ErrorPage details={errorDetails} />}
+
+      {isLoading && <Spinner />}
+      {!farmsError && !isLoading && (
         <FarmList
           farms={filteredFarms}
           cropTypes={cropTypes}
           onDelete={handleDelete}
         />
       )}
+
       <Modal show={showModal} onClose={closeModal} title="Register New Farm">
         <AddFarmForm cropTypes={cropTypes} onSubmit={handleSubmit} />
       </Modal>

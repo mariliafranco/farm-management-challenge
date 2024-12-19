@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import "./FarmList.scss";
 import { CropType, Farm } from "../../types/Farm";
 import CropList from "../CropList/CropList";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-import { deleteFarm } from "../../services/apiService";
 
 type FarmListProps = {
   farms: Farm[];

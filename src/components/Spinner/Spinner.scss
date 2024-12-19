@@ -1,0 +1,12 @@
+@use "../../styles/_mixins.scss" as mixins;
+@use "../../styles/global.scss" as global;
+
+.spinner-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 15%;
+
+  .spinner-grow {
+    color: global.$primary-color;
+  }
+}
