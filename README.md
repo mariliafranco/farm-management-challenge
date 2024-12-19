@@ -1,11 +1,13 @@
 # Farm Management App
 
-This app enables users to manage farms and their associated crop productions, based on functionalities to create and delete farms with nested crop production, while listing from the most recent to the oldest.
+The main goal of this application is to register and manage farms with their associated crop productions. It is based on creating and deleting farms with nested crops production, while listing from the most recent to the oldest.
 
 #### Features
 
 _Create a Farm:_ Add a new farm with details including land area, unit of measure, address, and associated crop productions.
+
 _Delete a Farm:_ Remove an existing farm by its unique identifier.
+
 _List Farms:_ Display all farms, ordered from the most recent to the oldest based on their creation date.
 
 #### Technologies Used
