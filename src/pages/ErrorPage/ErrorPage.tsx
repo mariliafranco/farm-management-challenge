@@ -1,6 +1,6 @@
 import React from "react";
-import "./ErrorPage.scss";
 import ErrorContainer from "../../components/ErrorContainer/ErrorContainer";
+import "./ErrorPage.scss";
 
 type ErrorDetails = {
   message?: string;

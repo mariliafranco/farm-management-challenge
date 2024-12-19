@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 type ErrorDetails = {
   message?: string;
@@ -29,7 +30,7 @@ const ErrorContainer: React.FC<ErrorPageProps> = ({
       {notFound && (
         <p>
           <small>
-            Try returning to the <a href="/">homepage</a>.
+            Try returning to the <Link to="/">homepage</Link>
           </small>
         </p>
       )}

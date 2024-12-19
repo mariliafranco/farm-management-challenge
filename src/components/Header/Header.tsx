@@ -1,16 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Header.scss";
 
 const Header = () => {
   return (
     <header className="header">
-      <img src={logo} alt="App Logo" className="logo" />
+      <Link to="/">
+        {" "}
+        <img src={logo} alt="App Logo" className="logo" />
+      </Link>
       <p>FARMS APP</p>
-      {/* <form>
-                <input type='search'/>
-                <input type='submit'/>
-            </form> */}
     </header>
   );
 };
