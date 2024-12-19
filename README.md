@@ -204,10 +204,7 @@ GET /cropTypes: Retrieve all crop types.
 
 ###### Future Enhancements
 
-Potential improvements for the application include:
+Next round of improvements for the application:
 
-Enhanced List Experience:
 Paginated results with dynamic page sizes.
-
-Code Reliability:
 Implementing unit and end-to-end tests.
