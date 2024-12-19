@@ -125,7 +125,11 @@ const FarmListingPage: React.FC = () => {
       generateFeedback(true, "All done", "Farm was deleted!");
     } catch (error) {
       console.error("Error deleting farm:", error);
-      generateFeedback(false, "Not a good deal", "Farm was not deleted");
+      generateFeedback(
+        false,
+        "Not a good deal",
+        "It was not possible to delete"
+      );
     }
   };
 

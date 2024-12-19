@@ -1,22 +1,5 @@
 {
-  "farms": [
-    {
-      "id": "dec9",
-      "farmName": "testing",
-      "landArea": "1",
-      "landUnit": "Acre",
-      "farmAddress": "sffd",
-      "createdAt": "2024-12-18T20:03:42.333Z",
-      "cropProductions": [
-        {
-          "id": 0,
-          "cropTypeId": 1,
-          "isIrrigated": false,
-          "isInsured": false
-        }
-      ]
-    }
-  ],
+  "farms": [],
   "crop-types": [
     {
       "id": "1",

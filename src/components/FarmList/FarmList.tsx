@@ -21,8 +21,8 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
 
   if (!farms.length) {
     return (
-      <div className="text-center mt-4">
-        <p className="alert alert-warning">No farms available.</p>
+      <div className="empty-list text-center">
+        <p>There is no farm registered yet</p>
       </div>
     );
   }
@@ -68,7 +68,7 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
                 />
               ) : (
                 <p className="mt-3 text-muted">
-                  No crop productions available for this farm.
+                  No crop production registered for this farm.
                 </p>
               )}
             </div>
