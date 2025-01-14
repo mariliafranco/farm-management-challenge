@@ -13,6 +13,7 @@ import "./FarmListingPage.scss";
 import FeedbackToast from "../../components/FeedbackToast/FeedbackToast";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Spinner from "../../components/Spinner/Spinner";
+import { useSearchParams } from "react-router-dom";
 
 type ErrorProps = {
   message: string;
@@ -32,7 +33,7 @@ const FarmListingPage: React.FC = () => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const [searchEntry, setSearchEntry] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [feedbackTitle, setFeedbackTitle] = useState<string>("");
 
@@ -41,6 +42,8 @@ const FarmListingPage: React.FC = () => {
   const [showFeedback, setShowFeedback] = useState<boolean>(false);
 
   const [isPositiveFeedback, setIsPositiveFeedback] = useState<boolean>(true);
+
+  const searchQuery = searchParams.get("search") || "";
 
   useEffect(() => {
     const fetchFarms = async () => {
@@ -64,6 +67,11 @@ const FarmListingPage: React.FC = () => {
 
     fetchFarms();
   }, []);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchParams(query ? { search: query } : {});
+  };
 
   useEffect(() => {
     const fetchCropTypes = async () => {
@@ -134,7 +142,7 @@ const FarmListingPage: React.FC = () => {
   };
 
   const filteredFarms = farms.filter((farm) =>
-    farm.farmName?.toLowerCase().includes(searchEntry.toLowerCase())
+    farm.farmName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -145,8 +153,8 @@ const FarmListingPage: React.FC = () => {
           type="search"
           placeholder="  Search for the farm name"
           className="farm-search w-25"
-          value={searchEntry}
-          onChange={(e) => setSearchEntry(e.target.value)}
+          value={searchQuery}
+          onChange={handleSearchChange}
         />
         <button type="button" className="btn" onClick={openModal}>
           Add new farm

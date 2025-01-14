@@ -14,11 +14,6 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [deleteFarmId, setDeleteFarmId] = useState<string>("");
 
-  const sortedFarms = [...farms].sort(
-    (a: Farm, b: Farm) =>
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
-
   if (!farms.length) {
     return (
       <div className="empty-list text-center">
@@ -39,7 +34,7 @@ const FarmList: React.FC<FarmListProps> = ({ farms, cropTypes, onDelete }) => {
 
   return (
     <div className="row farm-list">
-      {sortedFarms.map((farm) => (
+      {farms.map((farm) => (
         <div key={farm.id} className="col-md-4 col-sm-4 col-xs-12 mb-4">
           <div className="farm-list-item">
             <div className="farm-delete-icon">

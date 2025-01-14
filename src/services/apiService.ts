@@ -3,9 +3,21 @@ import { CropType, Farm } from "../types/Farm";
 
 const API_BASE_URL = "http://localhost:3001";
 
-export const getFarms = async (): Promise<Farm[]> => {
+interface GetFarmsParams {
+  search?: string;
+}
+
+export const getFarms = async ({ search }: GetFarmsParams = {}): Promise<
+  Farm[]
+> => {
   try {
-    const response = await axios.get<Farm[]>(`${API_BASE_URL}/farms`);
+    const response = await axios.get<Farm[]>(`${API_BASE_URL}/farms`, {
+      params: {
+        _sort: "createdAt",
+        _order: "desc",
+        q: search || "",
+      },
+    });
     return response.data;
   } catch (error: unknown) {
     console.error("Error fetching farms:", error);
