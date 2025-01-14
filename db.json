@@ -1,5 +1,38 @@
 {
-  "farms": [],
+  "farms": [
+    {
+      "id": "80a1",
+      "farmName": "New Farm",
+      "landArea": "3",
+      "landUnit": "Acre",
+      "farmAddress": "New Farm Address",
+      "createdAt": "2025-01-06T20:23:29.922Z",
+      "cropProductions": [
+        {
+          "id": 0,
+          "cropTypeId": 1,
+          "isIrrigated": true,
+          "isInsured": true
+        }
+      ]
+    },
+    {
+      "id": "935d",
+      "farmName": "Farm Name",
+      "landArea": "1",
+      "landUnit": "Square Miles",
+      "farmAddress": "sdfsdf",
+      "createdAt": "2025-01-06T20:23:40.379Z",
+      "cropProductions": [
+        {
+          "id": 0,
+          "cropTypeId": 4,
+          "isIrrigated": false,
+          "isInsured": false
+        }
+      ]
+    }
+  ],
   "crop-types": [
     {
       "id": "1",
